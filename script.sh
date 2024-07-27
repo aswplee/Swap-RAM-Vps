@@ -34,6 +34,14 @@ create_swap() {
 remove_swap() {
     local swap_file="/var/cache/swap/swapfile"
     
+    # Confirmation prompt
+    echo "Are you sure you want to remove all existing swap files? This action cannot be undone."
+    read -p "Type 'yes' to confirm: " confirmation
+    if [ "$confirmation" != "yes" ]; then
+        echo "Operation cancelled."
+        exit 1
+    fi
+    
     echo "Removing swap file..."
     
     # Turn off swap
